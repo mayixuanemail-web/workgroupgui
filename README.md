@@ -42,27 +42,6 @@ streamlit run main_gui.py
 - **🔄 重启**：刷新页面
 - **🔄 重置排序**：恢复默认按钮顺序
 
-## 📝 自定义配置
-
-### 修改默认按钮顺序
-编辑 `main_gui.py` 中的 `DEFAULT_SCRIPTS` 列表（第17-35行）：
-```python
-DEFAULT_SCRIPTS = [
-    {"file": "脚本文件名.py", "name": "显示名称", "icon": "📝", "type": "script"},
-    # 调整这些行的顺序即可改变默认显示顺序
-]
-```
-
-### 添加新按钮
-在 `DEFAULT_SCRIPTS` 列表中添加新项：
-```python
-{"file": "your_script.py", "name": "按钮显示名称", "icon": "🎯", "type": "script"},
-```
-
-### 删除按钮
-- 方法1：打开编辑模式，点击 🗑️ 按钮
-- 方法2：从 `DEFAULT_SCRIPTS` 列表中删除对应行
-
 ## 🛠️ 依赖安装
 
 ```powershell
