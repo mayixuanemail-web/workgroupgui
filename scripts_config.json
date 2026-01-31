@@ -1,0 +1,98 @@
+[
+  {
+    "file": "add_excel_title.py",
+    "name": "添加Excel标题(属)",
+    "icon": "📝",
+    "type": "script"
+  },
+  {
+    "file": "attract_pdf_good.py",
+    "name": "提取PDF（优质）",
+    "icon": "📄",
+    "type": "script"
+  },
+  {
+    "file": "check_excel_null.py",
+    "name": "检查Excel空值",
+    "icon": "🔍",
+    "type": "script"
+  },
+  {
+    "file": "create_excel_sum.py",
+    "name": "创建Excel汇总",
+    "icon": "📊",
+    "type": "script"
+  },
+  {
+    "file": "delete_excel_col_种.py",
+    "name": "删除Excel列（种）",
+    "icon": "🗑️",
+    "type": "script"
+  },
+  {
+    "file": "delete_excel_col_taxid.py",
+    "name": "删除Excel列（TaxID）",
+    "icon": "🗑️",
+    "type": "script"
+  },
+  {
+    "file": "mark_excel_cell.py",
+    "name": "标记Excel单元格",
+    "icon": "🖍️",
+    "type": "script"
+  },
+  {
+    "file": "mark_excel_ff7f00.py",
+    "name": "为极好的种标橙",
+    "icon": "🟠",
+    "type": "script"
+  },
+  {
+    "file": "process_excel_part.py",
+    "name": "reads求和(part)",
+    "icon": "⚙️",
+    "type": "script"
+  },
+  {
+    "file": "process_sum_excel_sum.py",
+    "name": "reads求和(summary)",
+    "icon": "⚙️",
+    "type": "script"
+  },
+  {
+    "file": "rename_excel_cell.py",
+    "name": "重命名Excel单元格",
+    "icon": "✏️",
+    "type": "script"
+  },
+  {
+    "file": "set_excel_title.py",
+    "name": "设置Excel标题",
+    "icon": "📋",
+    "type": "script"
+  },
+  {
+    "file": "sort_excel_color.py",
+    "name": "按颜色排序Excel",
+    "icon": "🎨",
+    "type": "script"
+  },
+  {
+    "file": "sort_sum_excel_color.py",
+    "name": "按颜色排序汇总Excel",
+    "icon": "🎨",
+    "type": "script"
+  },
+  {
+    "file": "recognition_pdf_excellent.py",
+    "name": "PDF分类工具（旧版）",
+    "icon": "🎯",
+    "type": "script"
+  },
+  {
+    "file": "recognition_pdf_excellent_streamlit.py",
+    "name": "PDF分类工具（Streamlit）",
+    "icon": "🎯",
+    "type": "streamlit"
+  }
+]

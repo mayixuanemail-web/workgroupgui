@@ -1,0 +1,5 @@
+Plastid/part0/1_3_1_3_fastp.Plastid.part0.species_taxonomy_table.xlsx: 1 null cells in column '属'
+Protozoa/part0/1_3_1_3_fastp.Protozoa.part0.species_taxonomy_table.xlsx: 1 null cells in column '属'
+Viral/part0/1_3_1_3_fastp.Viral.part0.species_taxonomy_table.xlsx: 1 null cells in column '属'
+Bacteria/part39/1_4_1_51_fastp.Bacteria.part39.species_taxonomy_table.xlsx: 1 null cells in column '属'
+Viral/part0/1_4_1_51_fastp.Viral.part0.species_taxonomy_table.xlsx: 1 null cells in column '属'

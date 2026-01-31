@@ -1,0 +1,6 @@
+streamlit==1.53.1
+pandas
+openpyxl
+Pillow
+PyMuPDF
+altair

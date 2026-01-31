@@ -1,0 +1,9 @@
+[client]
+locale = "zh_CN"
+
+[theme]
+primaryColor = "#FF6B6B"
+backgroundColor = "#F0F2F6"
+secondaryBackgroundColor = "#E8EAEF"
+textColor = "#262730"
+font = "sans serif"
