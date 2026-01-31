@@ -107,52 +107,6 @@ def run_script(script):
             except Exception as e:
                 st.error(f"❌ 运行出错: {str(e)}")
 
-# 侧边栏：编辑模式
-with st.sidebar:
-    st.header("⚙️ 工具配置")
-    
-    if st.checkbox("🔧 编辑模式", value=False):
-        st.subheader("按钮排序编辑")
-        
-        scripts_list = load_scripts_config()
-        
-        # 显示可拖动的按钮列表
-        for idx, script in enumerate(scripts_list):
-            col1, col2, col3, col4, col5 = st.columns([0.5, 3, 0.5, 0.5, 0.5])
-            
-            with col1:
-                st.write(f"{idx + 1}")
-            
-            with col2:
-                st.write(f"{script['icon']} {script['name']}")
-            
-            with col3:
-                if st.button("⬆️", key=f"up_{idx}"):
-                    if idx > 0:
-                        scripts_list[idx], scripts_list[idx - 1] = scripts_list[idx - 1], scripts_list[idx]
-                        save_scripts_config(scripts_list)
-                        st.rerun()
-            
-            with col4:
-                if st.button("⬇️", key=f"down_{idx}"):
-                    if idx < len(scripts_list) - 1:
-                        scripts_list[idx], scripts_list[idx + 1] = scripts_list[idx + 1], scripts_list[idx]
-                        save_scripts_config(scripts_list)
-                        st.rerun()
-            
-            with col5:
-                if st.button("🗑️", key=f"del_{idx}"):
-                    scripts_list.pop(idx)
-                    save_scripts_config(scripts_list)
-                    st.rerun()
-        
-        # 重置按钮
-        if st.button("🔄 恢复默认顺序"):
-            save_scripts_config(DEFAULT_SCRIPTS)
-            st.rerun()
-    else:
-        st.info("💡 打开'编辑模式'可拖动按钮进行分类")
-
 # 加载脚本配置
 
 scripts = load_scripts_config()
