@@ -158,9 +158,25 @@ with st.sidebar:
 scripts = load_scripts_config()
 
 # 标题与操作按钮同一行
-col_title, col_close, col_restart, col_reset = st.columns([5, 1, 1, 1])
+col_title, col_update, col_close, col_restart, col_reset = st.columns([4, 1, 1, 1, 1])
 with col_title:
     st.markdown("## 🚀 脚本管理工具")
+with col_update:
+    if st.button("⬆️ 更新", use_container_width=True):
+        try:
+            result = subprocess.run(
+                ["git", "pull"],
+                capture_output=True,
+                text=True,
+                cwd=os.path.dirname(__file__)
+            )
+            if result.returncode == 0:
+                st.success("✅ 代码已更新！请刷新页面")
+                st.info(result.stdout if result.stdout else "已是最新版本")
+            else:
+                st.error(f"❌ 更新失败: {result.stderr}")
+        except Exception as e:
+            st.error(f"❌ 更新出错: {str(e)}")
 with col_close:
     if st.button("❌ 关闭", use_container_width=True):
         st.warning("正在关闭应用...")
