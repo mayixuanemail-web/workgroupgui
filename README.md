@@ -6,7 +6,7 @@
 
 1. 解压 workgroupgui 文件。
 2. 在解压后的文件夹中新建一个名为 files_debug 的文件夹。
-3. 将文件解压缩到 files_debug 文件夹内。
+3. 将 ***原始文件*** 解压缩到 files_debug 文件夹内。
 4. 统一使用 Python 3.12 版本，如果不是请重新安装。
 5. 大家可以通过如下链接下载最新代码：
 	https://github.com/mayixuanemail-web/workgroupgui/archive/refs/heads/main.zip
