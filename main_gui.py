@@ -72,39 +72,22 @@ def run_script(script):
             except Exception as e:
                 st.error(f"❌ 启动出错: {str(e)}")
     else:
-        with st.spinner(f"正在运行 {script['name']}..."):
-            try:
-                result = subprocess.run(
-                    [PYTHON_PATH, script_path],
-                    capture_output=True,
-                    text=True,
-                    timeout=300
-                )
-                
-                if result.returncode == 0:
-                    st.success(f"✅ {script['name']} 执行成功！")
-                    if result.stdout:
-                        with st.expander("查看输出", expanded=True):
-                            col_output, col_close_btn = st.columns([10, 1])
-                            with col_output:
-                                st.code(result.stdout)
-                            with col_close_btn:
-                                if st.button("❌", key=f"close_output_{script['file']}", help="关闭"):
-                                    st.rerun()
-                else:
-                    st.error(f"❌ {script['name']} 执行失败！")
-                    if result.stderr:
-                        with st.expander("查看错误信息", expanded=True):
-                            col_error, col_close_btn2 = st.columns([10, 1])
-                            with col_error:
-                                st.code(result.stderr)
-                            with col_close_btn2:
-                                if st.button("❌", key=f"close_error_{script['file']}", help="关闭"):
-                                    st.rerun()
-            except subprocess.TimeoutExpired:
-                st.error(f"⏱️ {script['name']} 执行超时（超过5分钟）")
-            except Exception as e:
-                st.error(f"❌ 运行出错: {str(e)}")
+        st.info(f"🚀 正在运行 {script['name']}，输出将显示在终端中...")
+        try:
+            # 直接运行，输出到终端
+            result = subprocess.run(
+                [PYTHON_PATH, script_path],
+                timeout=300
+            )
+            
+            if result.returncode == 0:
+                st.success(f"✅ {script['name']} 执行成功！")
+            else:
+                st.error(f"❌ {script['name']} 执行失败，请查看终端输出")
+        except subprocess.TimeoutExpired:
+            st.error(f"⏱️ {script['name']} 执行超时（超过5分钟）")
+        except Exception as e:
+            st.error(f"❌ 运行出错: {str(e)}")
 
 # 加载脚本配置
 
@@ -282,10 +265,22 @@ with st.container():
         col_run1, col_run2 = st.columns(2)
         with col_run1:
             if st.button("🚀 一键批量运行", use_container_width=True):
-                for file_name in st.session_state.batch_queue:
+                # 显示进度条
+                progress_bar = st.progress(0)
+                status_text = st.empty()
+                
+                total_scripts = len(st.session_state.batch_queue)
+                for idx, file_name in enumerate(st.session_state.batch_queue):
                     script = get_script_by_file(file_name)
                     if script:
+                        # 更新进度条
+                        progress = (idx + 1) / total_scripts
+                        progress_bar.progress(progress)
+                        status_text.markdown(f"**进度：** {idx + 1}/{total_scripts} - 正在运行 {script['name']}...")
                         run_script(script)
+                
+                progress_bar.progress(1.0)
+                status_text.markdown("✅ **所有脚本运行完成！**")
         with col_run2:
             if st.button("🧹 清空队列", use_container_width=True):
                 st.session_state.batch_queue = []
