@@ -163,41 +163,7 @@ def get_script_by_file(file_name):
             return item
     return None
 
-# 创建多列布局
-cols_per_row = 3
-
-# 第一部分：非 SUM 脚本
-st.subheader("📊 单part表格操作工具")
-non_sum_scripts = [s for s in scripts if not is_sum_script(s)]
-for i in range(0, len(non_sum_scripts), cols_per_row):
-    cols = st.columns(cols_per_row)
-    for j, col in enumerate(cols):
-        if i + j < len(non_sum_scripts):
-            script = non_sum_scripts[i + j]
-            with col:
-                if st.button(f"{script['icon']} {script['name']}", key=f"btn_{i+j}_{script['file']}", use_container_width=True):
-                    run_script(script)
-
-# 分界线
-st.markdown("---")
-
-# 第二部分：SUM 脚本
-st.subheader("📑 汇总表格操作工具")
-sum_scripts = [s for s in scripts if is_sum_script(s)]
-for i in range(0, len(sum_scripts), cols_per_row):
-    cols = st.columns(cols_per_row)
-    for j, col in enumerate(cols):
-        if i + j < len(sum_scripts):
-            script = sum_scripts[i + j]
-            with col:
-                if st.button(f"{script['icon']} {script['name']}", key=f"btn_{i+j}_sum_{script['file']}", use_container_width=True):
-                    run_script(script)
-st.markdown("---")
-st.info("💡 点击对应按钮即可运行相应的Python脚本。Streamlit应用会在新进程中启动。")
-
-st.markdown("---")
-
-# 批量运行窗口
+# ============= 批量运行窗口 =============
 st.subheader("🧩 批量运行窗口")
 
 # 预设队列选择
@@ -285,6 +251,41 @@ with st.container():
             if st.button("🧹 清空队列", use_container_width=True):
                 st.session_state.batch_queue = []
                 st.rerun()
+
+st.markdown("---")
+
+# ============= 脚本按钮窗口 =============
+# 创建多列布局
+cols_per_row = 3
+
+# 第一部分：非 SUM 脚本
+st.subheader("📊 单part表格操作工具")
+non_sum_scripts = [s for s in scripts if not is_sum_script(s)]
+for i in range(0, len(non_sum_scripts), cols_per_row):
+    cols = st.columns(cols_per_row)
+    for j, col in enumerate(cols):
+        if i + j < len(non_sum_scripts):
+            script = non_sum_scripts[i + j]
+            with col:
+                if st.button(f"{script['icon']} {script['name']}", key=f"btn_{i+j}_{script['file']}", use_container_width=True):
+                    run_script(script)
+
+# 分界线
+st.markdown("---")
+
+# 第二部分：SUM 脚本
+st.subheader("📑 汇总表格操作工具")
+sum_scripts = [s for s in scripts if is_sum_script(s)]
+for i in range(0, len(sum_scripts), cols_per_row):
+    cols = st.columns(cols_per_row)
+    for j, col in enumerate(cols):
+        if i + j < len(sum_scripts):
+            script = sum_scripts[i + j]
+            with col:
+                if st.button(f"{script['icon']} {script['name']}", key=f"btn_{i+j}_sum_{script['file']}", use_container_width=True):
+                    run_script(script)
+st.markdown("---")
+st.info("💡 点击对应按钮即可运行相应的Python脚本。Streamlit应用会在新进程中启动。")
 
 st.markdown("---")
 
