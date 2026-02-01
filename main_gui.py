@@ -7,8 +7,8 @@ from pathlib import Path
 # 页面配置
 st.set_page_config(page_title="脚本管理工具", page_icon="🚀", layout="wide")
 
-# Python解释器路径
-PYTHON_PATH = "C:/Users/ma/AppData/Local/Programs/Python/Python312/python.exe"
+# 使用 python 命令运行（自动从 PATH 查找）
+PYTHON_PATH = "python"
 
 # 配置文件路径
 CONFIG_FILE = "scripts_config.json"
@@ -55,7 +55,7 @@ def save_scripts_config(scripts):
 
 def run_script(script):
     """运行脚本或启动Streamlit应用"""
-    script_path = os.path.join(os.path.dirname(__file__), script['file'])
+    script_path = script['file']
     
     if not os.path.exists(script_path):
         st.error(f"❌ 找不到文件: {script['file']}")
@@ -65,8 +65,7 @@ def run_script(script):
         with st.spinner(f"正在启动 {script['name']}..."):
             try:
                 subprocess.Popen(
-                    [PYTHON_PATH, "-m", "streamlit", "run", script_path],
-                    cwd=os.path.dirname(__file__)
+                    [PYTHON_PATH, "-m", "streamlit", "run", script_path]
                 )
                 st.success(f"✅ {script['name']} 已启动！")
                 st.info("💡 新应用将在浏览器新标签页中打开（通常在几秒后）")
@@ -121,8 +120,7 @@ with col_update:
             result = subprocess.run(
                 ["git", "pull"],
                 capture_output=True,
-                text=True,
-                cwd=os.path.dirname(__file__)
+                text=True
             )
             if result.returncode == 0:
                 st.success("✅ 代码已更新！请刷新页面")
@@ -298,7 +296,7 @@ st.markdown("---")
 # 显示 README
 st.subheader("📖 项目说明")
 
-readme_path = os.path.join(os.path.dirname(__file__), "README.md")
+readme_path = "README.md"
 if os.path.exists(readme_path):
     with open(readme_path, "r", encoding="utf-8") as f:
         readme_content = f.read()
