@@ -106,8 +106,8 @@ def render_pdf_preview_cached(pdf_path, max_width=500, max_height=300):
             doc.close()
             return None
         page = doc.load_page(0)
-        # 降低渲染倍数到1，大幅提升速度
-        mat = fitz.Matrix(1, 1)
+        # 1.5x缩放：优先速度，兼顾清晰度（本地运行）
+        mat = fitz.Matrix(2, 2)
         pix = page.get_pixmap(matrix=mat, alpha=False)
         img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
         doc.close()
@@ -120,7 +120,7 @@ def render_pdf_preview_cached(pdf_path, max_width=500, max_height=300):
         
         # 转换为bytes返回（缓存bytes比Image对象更高效）
         buf = io.BytesIO()
-        img.save(buf, format='JPEG', quality=85)  # 使用JPEG更快
+        img.save(buf, format='JPEG', quality=95)  # 质量95（本地运行优先清晰度）
         return buf.getvalue()
     except Exception as e:
         return None
@@ -245,6 +245,13 @@ def restart_current_directory():
     if not st.session_state.source_dir:
         st.warning("⚠️ 当前没有加载目录")
         return
+    
+    # 计算当前目录处理的PDF数量（用于减少全局统计）
+    current_dir_count = sum(
+        1 for h in st.session_state.global_history 
+        if h[4] == st.session_state.source_dir and h[5] == st.session_state.target_dir
+    )
+    st.session_state.processed_pdfs = max(0, st.session_state.processed_pdfs - current_dir_count)
     
     # 删除目标目录中的 PDF 文件
     if os.path.exists(st.session_state.target_dir):
