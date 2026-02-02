@@ -10,7 +10,7 @@
 4. 统一使用 Python 3.12 版本，如果不是请重新安装。
 5. 大家可以通过如下链接下载最新代码：
 	https://github.com/mayixuanemail-web/workgroupgui/archive/refs/heads/main.zip
-6. 运行 install_request.py 以安装依赖。
+6. 运行 install_request.py 以安装依赖（安装一次即可，后续无需安装）。
 7. 运行 start_gui 文件启动程序。
 8. 找到批量运行窗口，点击“预处理”，点击“一键批量运行”，等待程序完成后完成预处理。
 9. 点击“PDF分类工具”，手动完成分类，其中有两个版本可自行选择。
