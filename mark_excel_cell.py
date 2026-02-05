@@ -113,6 +113,8 @@ def batch_mark_column_in_directory(base_path, target_col, ori_col,fill_color, su
                 
                 # 使用第一个找到的文件
                 xlsx_dir = xlsx_files_in_part[0]
+                if len(xlsx_files_in_part) > 1:
+                    print(f"  Warning: Multiple '分类结果.xlsx' files found in '{part_dir}', using: {xlsx_dir.name}")
                 
                 if not table_dir.exists():
                     print(f"  Error: Table directory '{table_dir}' not found, skipping...")
