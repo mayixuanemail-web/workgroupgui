@@ -105,14 +105,14 @@ def batch_mark_column_in_directory(base_path, target_col, ori_col,fill_color, su
                 # 构建 species_taxonomy_table 目录路径
                 table_dir = part_dir / "species_taxonomy_table"
 
-                # 构建 part_dir / number.category.partxx.分类结果.xlsx 目录路径
-                number=number_dir.name
-                category=category_dir.name
-                part=part_dir.name
-                xlsx_dir = part_dir / f"{number}.{category}.{part}.分类结果.xlsx"
-                if not xlsx_dir.exists():
-                    print(f"  Error: Reference file '{xlsx_dir}' not found, skipping...")
+                # 查找 part_dir 下包含"分类结果"的 xlsx 文件
+                xlsx_files_in_part = list(part_dir.glob("*分类结果.xlsx"))
+                if not xlsx_files_in_part:
+                    print(f"  Error: No '分类结果.xlsx' file found in '{part_dir}', skipping...")
                     continue
+                
+                # 使用第一个找到的文件
+                xlsx_dir = xlsx_files_in_part[0]
                 
                 if not table_dir.exists():
                     print(f"  Error: Table directory '{table_dir}' not found, skipping...")
