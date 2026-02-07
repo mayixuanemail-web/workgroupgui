@@ -84,6 +84,24 @@
     "type": "script"
   },
   {
+    "file": "translate_sum_genus_from_mapping.py",
+    "name": "属名翻译（汇总）",
+    "icon": "🈶",
+    "type": "script"
+  },
+  {
+    "file": "pdf_first_page_to_png.py",
+    "name": "PDF首页转PNG",
+    "icon": "🖼️",
+    "type": "script"
+  },
+  {
+    "file": "Recognition_PDF_automatically.py",
+    "name": "PDF自动识别",
+    "icon": "🤖",
+    "type": "script"
+  },
+  {
     "file": "recognition_pdf_excellent.py",
     "name": "PDF分类工具（旧版）",
     "icon": "🎯",

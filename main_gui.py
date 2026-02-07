@@ -29,6 +29,10 @@ DEFAULT_SCRIPTS = [
     {"file": "set_excel_title.py", "name": "设置Excel标题", "icon": "📋", "type": "script"},
     {"file": "sort_excel_color.py", "name": "按颜色排序Excel", "icon": "🎨", "type": "script"},
     {"file": "sort_sum_excel_color.py", "name": "按颜色排序汇总Excel", "icon": "🎨", "type": "script"},
+    {"file": "translate_sum_genus_from_mapping.py", "name": "属名翻译（汇总）", "icon": "🈶", "type": "script"},
+    {"file": "pdf_first_page_to_png.py", "name": "PDF首页转PNG", "icon": "🖼️", "type": "script"},
+    {"file": "Recognition_PDF_automatically.py", "name": "PDF自动识别", "icon": "🤖", "type": "script"},
+    {"file": "clean_temp_images.py", "name": "清理临时图片", "icon": "🧹", "type": "script"},
     {"file": "recognition_pdf_excellent.py", "name": "PDF分类工具（旧版）", "icon": "🎯", "type": "script"},
     {"file": "recognition_pdf_excellent_streamlit.py", "name": "PDF分类工具（Streamlit）", "icon": "🎯", "type": "streamlit"},
 ]
@@ -151,11 +155,30 @@ DEFAULT_BATCH_QUEUE_2 = [
     "sort_sum_excel_color.py",
 ]
 
+DEFAULT_BATCH_QUEUE_3 = [
+    "add_excel_title.py",
+    "set_excel_title.py",
+    "delete_excel_col_种.py",
+    "delete_excel_col_taxid.py",
+    "process_excel_part.py",
+    "rename_excel_cell.py",
+    "mark_excel_cell.py",
+    "attract_pdf_good.py",
+    "pdf_first_page_to_png.py",
+    "recognition_pdf_automatically.py",
+    "mark_excel_ff7f00.py",
+    "create_excel_sum.py",
+    "process_sum_excel_sum.py",
+    "sort_sum_excel_color.py",
+    "translate_sum_genus_from_mapping.py",
+    "clean_temp_images.py",
+]
+
 # 初始化批量运行队列
 if "batch_queue" not in st.session_state:
-    st.session_state.batch_queue = list(DEFAULT_BATCH_QUEUE_1)
+    st.session_state.batch_queue = list(DEFAULT_BATCH_QUEUE_3)
 if "queue_preset" not in st.session_state:
-    st.session_state.queue_preset = "队列1"
+    st.session_state.queue_preset = "队列3"
 
 def get_script_by_file(file_name):
     for item in scripts:
@@ -167,7 +190,7 @@ def get_script_by_file(file_name):
 st.subheader("🧩 批量运行窗口")
 
 # 预设队列选择
-preset_col1, preset_col2, preset_col3 = st.columns([2, 2, 4])
+preset_col1, preset_col2, preset_col3, preset_col4 = st.columns([2, 2, 2, 4])
 with preset_col1:
     if st.button("🔧 预处理", use_container_width=True, key="load_preset_1"):
         st.session_state.batch_queue = list(DEFAULT_BATCH_QUEUE_1)
@@ -179,6 +202,11 @@ with preset_col2:
         st.session_state.queue_preset = "汇总表格处理"
         st.rerun()
 with preset_col3:
+    if st.button("🤖 全自动处理", use_container_width=True, key="load_preset_3"):
+        st.session_state.batch_queue = list(DEFAULT_BATCH_QUEUE_3)
+        st.session_state.queue_preset = "全自动处理"
+        st.rerun()
+with preset_col4:
     st.markdown(f"**当前队列：** {st.session_state.queue_preset}")
 
 st.markdown("---")

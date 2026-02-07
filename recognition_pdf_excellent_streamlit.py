@@ -188,6 +188,10 @@ if "source_dir" not in st.session_state:
     st.session_state.log_messages = ["程序就绪，等待任务加载"]
     st.session_state.total_pdfs = 0
     st.session_state.processed_pdfs = 0
+    st.session_state.confirm_restart_current = False
+    st.session_state.confirm_restart_previous = False
+    st.session_state.confirm_restart_all = False
+    st.session_state.confirm_clear_history = False
     
     # 尝试加载历史记录
     load_history()
@@ -251,10 +255,23 @@ def render_sidebar():
                     use_container_width=True
                 )
             
-            # 清空按钮
-            if st.button("🗑️ 清空历史", use_container_width=True, key="clear_history_btn"):
-                clear_history()
-                st.rerun()
+            # 清空按钮（二级确认）
+            if not st.session_state.confirm_clear_history:
+                if st.button("🗑️ 清空历史", use_container_width=True, key="clear_history_btn"):
+                    st.session_state.confirm_clear_history = True
+                    st.rerun()
+            else:
+                st.warning("确认清空历史记录？该操作不可恢复。")
+                col_confirm_clear, col_cancel_clear = st.columns(2)
+                with col_confirm_clear:
+                    if st.button("✅ 确认", use_container_width=True, key="clear_history_confirm"):
+                        st.session_state.confirm_clear_history = False
+                        clear_history()
+                        st.rerun()
+                with col_cancel_clear:
+                    if st.button("❌ 取消", use_container_width=True, key="clear_history_cancel"):
+                        st.session_state.confirm_clear_history = False
+                        st.rerun()
         else:
             st.info("📭 无记录")
 
@@ -347,12 +364,39 @@ def pdf_viewer_fragment():
                 handle_directory_finished()
             st.rerun()
         
-        if st.button("🔄 重开当前目录", use_container_width=True, key="btn_restart_cur"):
-            restart_current_directory()
-            st.rerun()
+        if not st.session_state.confirm_restart_current:
+            if st.button("🔄 重开当前目录", use_container_width=True, key="btn_restart_cur"):
+                st.session_state.confirm_restart_current = True
+                st.rerun()
+        else:
+            st.warning("确认重新开始当前目录？该操作会删除已复制的PDF并清空当前目录进度。")
+            col_confirm_cur, col_cancel_cur = st.columns(2)
+            with col_confirm_cur:
+                if st.button("✅ 确认", use_container_width=True, key="btn_restart_cur_confirm"):
+                    st.session_state.confirm_restart_current = False
+                    restart_current_directory()
+                    st.rerun()
+            with col_cancel_cur:
+                if st.button("❌ 取消", use_container_width=True, key="btn_restart_cur_cancel"):
+                    st.session_state.confirm_restart_current = False
+                    st.rerun()
         
-        if st.button("⬅️ 重开上一目录", use_container_width=True, key="btn_restart_prev"):
-            restart_previous_directory()
+        if not st.session_state.confirm_restart_previous:
+            if st.button("⬅️ 重开上一目录", use_container_width=True, key="btn_restart_prev"):
+                st.session_state.confirm_restart_previous = True
+                st.rerun()
+        else:
+            st.warning("确认重新开始上一目录？该操作会删除上一目录已复制的PDF并回退进度。")
+            col_confirm_prev, col_cancel_prev = st.columns(2)
+            with col_confirm_prev:
+                if st.button("✅ 确认", use_container_width=True, key="btn_restart_prev_confirm"):
+                    st.session_state.confirm_restart_previous = False
+                    restart_previous_directory()
+                    st.rerun()
+            with col_cancel_prev:
+                if st.button("❌ 取消", use_container_width=True, key="btn_restart_prev_cancel"):
+                    st.session_state.confirm_restart_previous = False
+                    st.rerun()
         
         st.divider()
         st.write("**统计**")
@@ -557,9 +601,22 @@ with col_load:
             st.toast("❌ 未找到有效的源文件夹", icon="❌")
 
 with col_restart_all:
-    if st.button("🔁 重新开始全部", use_container_width=True):
-        restart_all_tasks()
-        st.rerun()
+    if not st.session_state.confirm_restart_all:
+        if st.button("🔁 重新开始全部", use_container_width=True, key="btn_restart_all"):
+            st.session_state.confirm_restart_all = True
+            st.rerun()
+    else:
+        st.warning("确认重新开始全部任务？该操作会删除所有已复制的PDF并清空所有进度。")
+        col_confirm_all, col_cancel_all = st.columns(2)
+        with col_confirm_all:
+            if st.button("✅ 确认", use_container_width=True, key="btn_restart_all_confirm"):
+                st.session_state.confirm_restart_all = False
+                restart_all_tasks()
+                st.rerun()
+        with col_cancel_all:
+            if st.button("❌ 取消", use_container_width=True, key="btn_restart_all_cancel"):
+                st.session_state.confirm_restart_all = False
+                st.rerun()
 
 # 主要内容区域 - 使用 fragment 实现局部刷新
 pdf_viewer_fragment()
