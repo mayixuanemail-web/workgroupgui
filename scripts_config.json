@@ -102,6 +102,12 @@
     "type": "script"
   },
   {
+    "file": "clean_temp_images.py",
+    "name": "清理临时图片",
+    "icon": "🧹",
+    "type": "script"
+  },
+  {
     "file": "recognition_pdf_excellent.py",
     "name": "PDF分类工具（旧版）",
     "icon": "🎯",

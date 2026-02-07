@@ -165,7 +165,7 @@ DEFAULT_BATCH_QUEUE_3 = [
     "mark_excel_cell.py",
     "attract_pdf_good.py",
     "pdf_first_page_to_png.py",
-    "recognition_pdf_automatically.py",
+    "Recognition_PDF_automatically.py",
     "mark_excel_ff7f00.py",
     "create_excel_sum.py",
     "process_sum_excel_sum.py",

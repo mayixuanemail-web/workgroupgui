@@ -170,4 +170,3 @@ if __name__ == "__main__":
             print(f"Batch processing completed. Success: {success}, Failed: {fail}")
             tran+=1
             break
-    
