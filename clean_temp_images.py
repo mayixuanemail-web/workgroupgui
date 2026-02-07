@@ -60,9 +60,15 @@ def delete_images_in_dir(dir_path: Path) -> tuple[int, int]:
                 except Exception as e:
                     print(f"  ❌ 删除失败: {file.name} - {e}")
                     fail_count += 1
+        # 删除完图片后，若目录为空则删除目录
+        if not any(dir_path.iterdir()):
+            try:
+                dir_path.rmdir()
+                print(f"  🗑️ 目录已删除: {dir_path}")
+            except Exception as e:
+                print(f"  ⚠️ 目录删除失败: {dir_path} - {e}")
     except Exception as e:
         print(f"  ❌ 访问目录出错: {e}")
-    
     return success_count, fail_count
 
 
