@@ -2,6 +2,9 @@
 *files*/
 # 忽略 zzz 文件夹
 zzz/
+# 忽略 translate 文件夹
+translate/
+
 # 忽略 Python 缓存文件
 __pycache__/
 *.pyc
