@@ -4,8 +4,13 @@ import os
 import json
 from pathlib import Path
 
+
 # 页面配置
 st.set_page_config(page_title="脚本管理工具", page_icon="🚀", layout="wide")
+
+# 标题与重要提示
+st.markdown('<span style="color:red;font-weight:bold;font-size:22px;">运行前务必更新最新代码</span>', unsafe_allow_html=True)
+st.markdown('<span style="color:red;font-weight:bold;font-size:22px;">滑动到最底部查看使用说明</span>', unsafe_allow_html=True)
 
 # 使用 python 命令运行（自动从 PATH 查找）
 PYTHON_PATH = "python"

@@ -1,20 +1,24 @@
+# ⚠️# 运行前务必更新代码
+# ⚠️# 运行前务必更新代码
+# ⚠️# 运行前务必更新代码
+> **务必先下载最新代码：**  
+> https://github.com/mayixuanemail-web/workgroupgui/archive/refs/heads/main.zip
+
 # workgroupgui
 
 # 脚本管理工具 (main_gui.py) 使用说明
 
 ## ✅ 快速上手（完整流程）
 
-1. 解压 workgroupgui 文件。
+1. 解压 workgroupgui_main 文件。
 2. 在解压后的文件夹中新建一个名为 files_debug 的文件夹。
 3. 将 ***原始文件*** 解压缩到 files_debug 文件夹内。
 4. 统一使用 Python 3.12 版本，如果不是请重新安装。
-5. 大家可以通过如下链接下载最新代码：
-	https://github.com/mayixuanemail-web/workgroupgui/archive/refs/heads/main.zip
-6. 运行 install_request.py 以安装依赖（安装一次即可，后续无需安装）。
-7. 运行 start_gui 启动程序。
-8. 直接点击全自动处理，等待程序自动完成。
-9. 程序可自动完成识别工作和80%左右的翻译，仅剩余少量的翻译工作手动完成。
-10. 在手动完成所有的翻译工作后,可将翻译完的文档发给我,使程序更加完善。
+5. 运行 install_request.py 以安装依赖（安装一次即可，后续无需安装）。
+6. 运行 start_gui 启动程序。
+7. 直接点击全自动处理——一键批量运行，等待程序自动完成。
+8. 程序可自动完成识别工作和80%左右的翻译，仅剩余少量的翻译工作手动完成。
+9. 在手动完成所有的翻译工作后,可将翻译完的文档发给我,使程序更加完善。
 
 ## 📖 项目简介
 
